@@ -1,0 +1,161 @@
+body {
+  background-color: #A09E9F;
+  font-family: 'Itim', cursive;
+  font-size: 20px;
+}
+
+button:focus,
+button:active {
+  box-shadow: none!important;
+  outline: none!important;
+}
+
+.hide-cursor {
+   cursor: none;
+}
+
+.centered-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.play-button {
+  position: absolute;
+  background-color: #A67B5A;
+  color: #eee;
+  border-radius: 10px;
+}
+
+.play-button:hover {
+  color: #eee;
+  background-color: #A67B4A;
+}
+
+.landscape {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 3s ease-in-out;
+  overflow: hidden;
+  z-index: -10;
+}
+
+.fullscreen-landscape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-landscape {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-landscape {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .landscape {
+    background: url('img/preview_water.jpg') center center / cover no-repeat;
+  }
+
+  .fullscreen-landscape {
+    display: none;
+  }
+}
+
+.init-opacity-off {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+}
+
+.opacity-on {
+  opacity: 1;
+  z-index: 10;
+}
+
+.opacity-off {
+  opacity: 0;
+  z-index: 10;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.info {
+  height: 100vh;
+  -webkit-transition: opacity 3s ease-in-out;
+}
+
+.infoMusic,
+.infoFx {
+  background-color: #979D73;
+  color: #eee;
+  height: 50px;
+  padding: 10px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.infoMenu,
+.goToLandscape {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 32px;
+}
+
+.infoMenu button img,
+.goToLandscape button img {
+  width: 64px;
+  height: 64px;
+}
+
+#menuButton {
+  opacity: 0.2;
+  -webkit-transition: opacity .3s ease-in-out;
+}
+
+#menuButton:hover {
+  opacity: 0.8;
+}
+
+#lsButton {
+  opacity: 0.8;
+  -webkit-transition: opacity .3s ease-in-out;
+}
+
+#lsButton:hover,
+.togglePlayButton:hover,
+.nextButton:hover {
+  opacity: 1;
+}
+
+.togglePlayButton,
+.nextButton {
+  opacity: 0.6;
+  -webkit-transition: opacity .3s ease-in-out;
+}
+
+.togglePlayButton img,
+.nextButton img {
+  width: 96px;
+  height: 96px;
+}
+
+.player {
+  position: absolute;
+}
