@@ -10,6 +10,11 @@ button:active {
   outline: none!important;
 }
 
+.logo {
+  width: 200px;
+  height: 200px;
+}
+
 .hide-cursor {
    cursor: none;
 }
@@ -78,7 +83,7 @@ button:active {
 
 .init-opacity-off {
   opacity: 0;
-  -webkit-transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
 }
 
 .opacity-on {
@@ -95,7 +100,8 @@ button:active {
     display: none;
 }
 
-.info {
+.info,
+.logo {
   -webkit-transition: opacity 3s ease-in-out;
 }
 
@@ -113,15 +119,31 @@ button:active {
 .infoMenu,
 .goToLandscape {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 32px;
+  bottom: 48px;
+  right: 48px;
 }
 
 .infoMenu button img,
 .goToLandscape button img {
   width: 64px;
   height: 64px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  color: #ccc;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.1), 0 0 25px rgba(0, 0, 0, 0.05) inset;
+}
+
+.footer .link {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer .link:hover {
+  color: #fff;
+  text-decoration: none;
 }
 
 #menuButton {
