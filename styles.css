@@ -101,7 +101,8 @@ button:active {
 }
 
 .info,
-.logo {
+.logo,
+.fade-in {
   -webkit-transition: opacity 3s ease-in-out;
 }
 
