@@ -81,7 +81,6 @@ function playFunction() {
             logo.classList.remove('init-opacity-off');
             footer.classList.remove('init-opacity-off');
 
-            // 2. This code loads the IFrame Player API code asynchronously.
             var tag = document.createElement('script');
 
             tag.src = "https://www.youtube.com/iframe_api";
@@ -91,8 +90,6 @@ function playFunction() {
       }, 300);
 }
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads._j5QY5LbCOM
 var playerMusic;
 var playerFx;
 var randomIndexMusic = Math.floor(Math.random() * 23);
@@ -122,35 +119,91 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 4. The API will call this function when the video player is ready.
 function onPlayerMusicReady(event) {
-    event.target.setShuffle({'shufflePlaylist': true});
-    event.target.setLoop({'loopPlaylists': true});
-    event.target.setVolume(80);
+    event.target.setVolume(75);
     event.target.seekTo(0);
     event.target.playVideo();
+    setTimeout(function() {
+      event.target.setShuffle({'shufflePlaylist': true});
+      event.target.setLoop({'loopPlaylists': true});
+    }, 1000);
 }
 
 function onPlayerFxReady(event) {
-    event.target.setLoop({'loopPlaylists': true});
-    event.target.setShuffle({'shufflePlaylist': true});
-    event.target.setVolume(95);
+    event.target.setVolume(100);
     event.target.seekTo(30);
     event.target.playVideo();
+    setTimeout(function() {
+      event.target.setLoop({'loopPlaylists': true});
+      event.target.setShuffle({'shufflePlaylist': true});
+    }, 1000);
 }
 
 function pauseVideo() {
   if (isPlayingVideo) {
-    playerMusic.pauseVideo();
-    playerFx.pauseVideo();
+    fadeOutSound();
     document.getElementById("togglePlayButton").src="img/play.png";
     lsVideo.pause();
     isPlayingVideo = false;
+    setTimeout(function() {
+      playerMusic.pauseVideo();
+      playerFx.pauseVideo();
+    }, 500);
   } else {
     playerMusic.playVideo();
     playerFx.playVideo();
+    fadeInSound();
     document.getElementById("togglePlayButton").src="img/pause.png";
     lsVideo.play();
     isPlayingVideo = true;
+  }
+}
+
+function nextVideo() {
+  document.getElementById("togglePlayButton").src="img/pause.png";
+  isPlayingVideo = false;
+  lsVideo.play();
+  fadeOutSound();
+  setTimeout(function() {
+    playerMusic.nextVideo();
+    playerFx.nextVideo();
+    isPlayingVideo = true;
+    fadeInSound();
+  }, 500);
+}
+
+function fadeInSound() {
+  fadeInInterval = setInterval(function() {
+    if(isPlayingVideo){
+      console.log('subiendo');
+      changeVolume(1) , 10 * 10
+    }
+   });
+}
+
+function fadeOutSound() {
+  fadeOutInterval = setInterval(function() {
+    if(!isPlayingVideo){
+      console.log('bajando');
+      changeVolume(0) , 10 * 10
+    }
+   });
+}
+
+function changeVolume(i) {
+  if(i) {
+    if(playerMusic.getVolume() <= 70) {
+      playerMusic.setVolume(playerMusic.getVolume() + 1);
+    }
+    playerFx.setVolume(playerFx.getVolume() + 1);
+    if(playerFx.getVolume() == 100) {
+      clearInterval(fadeInInterval);
+    }
+  } else {
+    playerMusic.setVolume(playerMusic.getVolume() - 1);
+    playerFx.setVolume(playerFx.getVolume() - 1);
+    if(playerFx.getVolume() == 0) {
+      clearInterval(fadeOutInterval);
+    }
   }
 }

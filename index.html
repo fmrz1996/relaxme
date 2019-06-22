@@ -14,7 +14,7 @@
       </video>
       <div id="player" class="centered-content player d-none">
         <button type="button" class="btn togglePlayButton" onclick="pauseVideo();"><img id="togglePlayButton" src="img/pause.png"></button>
-        <button type="button" class="btn nextButton"><img src="img/next.png"></button>
+        <button type="button" class="btn nextButton" onclick="nextVideo();"><img src="img/next.png"></button>
       </div>
       <div class="infoMenu">
         <button id="menuButton" type="button" class="btn d-none"><img src="img/menu.png" onclick="menuFunction();"></button>
@@ -39,9 +39,9 @@
           <div id="sectionFx"></div>
         </div>
       </div>
-    </div>
-    <div id="lsButton" class="goToLandscape d-none">
-      <button type="button" class="btn"><img src="img/house.png" onclick="lsFunction();"></button>
+      <div id="lsButton" class="goToLandscape d-none">
+        <button type="button" class="btn"><img src="img/house.png" onclick="lsFunction();"></button>
+      </div>
     </div>
     <footer id="footer" class="footer bg-dark w-100">
       <div class="container text-center">
