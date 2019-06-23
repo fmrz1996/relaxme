@@ -98,7 +98,7 @@ function onYouTubeIframeAPIReady() {
     playerMusic = new YT.Player('videoMusic', {
         width: '100%',
         playerVars: {
-          listType:'playlist',
+          listType: 'playlist',
           list: 'PLDMVPWmf2MSVR2M_krZ27xyisejTG-tQp',
           index: randomIndexMusic
         },
@@ -109,7 +109,7 @@ function onYouTubeIframeAPIReady() {
     playerFx = new YT.Player('videoFx', {
         width: '100%',
         playerVars: {
-          listType:'playlist',
+          listType: 'playlist',
           list: 'PLfy5ErD61bt9GB5QY1NWKVEQqcxdtI-Xw',
           index: randomIndexFx
         },
@@ -140,70 +140,29 @@ function onPlayerFxReady(event) {
 }
 
 function pauseVideo() {
-  if (isPlayingVideo) {
-    fadeOutSound();
-    document.getElementById("togglePlayButton").src="img/play.png";
+  if(isPlayingVideo) {
+    document.getElementById("togglePlayButtonImage").src="img/play.png";
     lsVideo.pause();
     isPlayingVideo = false;
-    setTimeout(function() {
-      playerMusic.pauseVideo();
-      playerFx.pauseVideo();
-    }, 500);
+    playerMusic.pauseVideo();
+    playerFx.pauseVideo();
   } else {
     playerMusic.playVideo();
     playerFx.playVideo();
-    fadeInSound();
-    document.getElementById("togglePlayButton").src="img/pause.png";
+    document.getElementById("togglePlayButtonImage").src="img/pause.png";
     lsVideo.play();
     isPlayingVideo = true;
   }
 }
 
 function nextVideo() {
-  document.getElementById("togglePlayButton").src="img/pause.png";
-  isPlayingVideo = false;
-  lsVideo.play();
-  fadeOutSound();
-  setTimeout(function() {
-    playerMusic.nextVideo();
-    playerFx.nextVideo();
+  document.getElementById("togglePlayButtonImage").src="img/pause.png";
+  if(!isPlayingVideo) {
+    lsVideo.play();
     isPlayingVideo = true;
-    fadeInSound();
-  }, 500);
-}
-
-function fadeInSound() {
-  fadeInInterval = setInterval(function() {
-    if(isPlayingVideo){
-      console.log('subiendo');
-      changeVolume(1) , 10 * 10
-    }
-   });
-}
-
-function fadeOutSound() {
-  fadeOutInterval = setInterval(function() {
-    if(!isPlayingVideo){
-      console.log('bajando');
-      changeVolume(0) , 10 * 10
-    }
-   });
-}
-
-function changeVolume(i) {
-  if(i) {
-    if(playerMusic.getVolume() <= 70) {
-      playerMusic.setVolume(playerMusic.getVolume() + 1);
-    }
-    playerFx.setVolume(playerFx.getVolume() + 1);
-    if(playerFx.getVolume() == 100) {
-      clearInterval(fadeInInterval);
-    }
-  } else {
-    playerMusic.setVolume(playerMusic.getVolume() - 1);
-    playerFx.setVolume(playerFx.getVolume() - 1);
-    if(playerFx.getVolume() == 0) {
-      clearInterval(fadeOutInterval);
-    }
   }
+  playerMusic.nextVideo();
+  playerFx.nextVideo();
+  playerMusic.seekTo(0);
+  playerFx.seekTo(30);
 }
