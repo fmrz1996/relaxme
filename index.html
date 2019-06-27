@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="styles.css">
     <title>RelaxMe</title>
   </head>
-  <body>
+  <body class="d-flex flex-column">
     <div id="landscape" class="landscape">
+      <!-- You can use any video like this: https://www.videvo.net/video/water-with-cloud-reflections/4085/ -->
       <video id="lsVideo" loop muted autoplay poster="img/preview_water.jpg" class="fullscreen-landscape">
         <source src="img/water.mp4" type="video/mp4">
       </video>
@@ -23,8 +24,8 @@
     <div class="row justify-content-center align-self-center">
       <img id="logo" class="mt-3 mb-3" src="img/logo.png">
     </div>
-    <div id="info" class="container info d-flex">
-      <button id="playButton" class="btn play-button centered-content" onclick="playFunction();return false;">Play!</button>
+    <div id="info" class="container info d-flex flex-column mb-4">
+      <button id="playButton" class="btn btn-lg play-button centered-content" onclick="playFunction();return false;">Play!</button>
       <div class="row justify-content-center align-self-center w-100">
         <div class="col-sm-6">
           <div id="infoMusic" class="infoMusic text-center d-none">

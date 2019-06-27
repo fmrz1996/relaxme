@@ -6,6 +6,7 @@ var menuButton = document.getElementById("menuButton");
 var lsVideo = document.getElementById("lsVideo");
 var footer = document.getElementById("footer");
 var timer;
+var autoChangeVideo;
 var fadeInBuffer = false;
 var isPlayingVideo = true;
 
@@ -93,10 +94,11 @@ function playFunction() {
 var playerMusic;
 var playerFx;
 var randomIndexMusic = Math.floor(Math.random() * 23);
-var randomIndexFx = Math.floor(Math.random() * 113);
+var randomIndexFx = Math.floor(Math.random() * 23);
 function onYouTubeIframeAPIReady() {
     playerMusic = new YT.Player('videoMusic', {
         width: '100%',
+        height: '320px',
         playerVars: {
           listType: 'playlist',
           list: 'PLDMVPWmf2MSVR2M_krZ27xyisejTG-tQp',
@@ -108,13 +110,15 @@ function onYouTubeIframeAPIReady() {
     });
     playerFx = new YT.Player('videoFx', {
         width: '100%',
+        height: '320px',
         playerVars: {
           listType: 'playlist',
-          list: 'PLfy5ErD61bt9GB5QY1NWKVEQqcxdtI-Xw',
+          list: 'PLDMVPWmf2MSXy3rw5FnxgBaYEvw_RbMaW',
           index: randomIndexFx
         },
         events: {
-            'onReady': onPlayerFxReady
+            'onReady': onPlayerFxReady,
+            'onStateChange': onPlayerFxStateChange
         }
     });
 }
@@ -165,4 +169,16 @@ function nextVideo() {
   playerFx.nextVideo();
   playerMusic.seekTo(0);
   playerFx.seekTo(30);
+}
+
+function onPlayerFxStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    autoChangeVideo = setTimeout(function() {
+      playerFx.nextVideo();
+    }, 900000);
+  }
+
+  if(event.data == YT.PlayerState.PAUSED) {
+    clearTimeout(autoChangeVideo);
+  }
 }
